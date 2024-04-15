@@ -2,12 +2,13 @@ import { ref, watchEffect } from "vue";
 import * as todoStorage from "../utils/todoStorage";
 
 export default function useTodoList() {
-  const todoRef = ref(todoStorage.fetch());
+  const todosRef = ref(todoStorage.fetch());
+  window.todosRef = todosRef;
   watchEffect(() => {
-    todoStorage.save(todoRef.value);
+    todoStorage.save(todosRef.value);
   });
 
   return {
-    todoRef,
+    todosRef,
   };
 }
